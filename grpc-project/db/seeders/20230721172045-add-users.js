@@ -7,14 +7,14 @@ module.exports = {
       {
         "name":"Rajan Raj",
         "username": "rajan",
-        "email":"rajanonly98@gmail.com",
-        "Password": await hashPassword("test"),
+        "email":"test@gmail.com",
+        "Password": await hashPassword("testuser"),
         "created_at": new Date()
       },
       {
-        "name":"Raj",
+        "name":"Rajan",
         "username": "raj",
-        "email":"rajanonly98test@gmail.com",
+        "email":"test2@gmail.com",
         "Password": await hashPassword("testpassword"),
         "created_at": new Date()
       }

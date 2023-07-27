@@ -3,7 +3,6 @@ const { authClient } = require("../client");
 async function auth(req, res, next){
     try {
         const isValidToken = await validateToken(req, next);
-        console.log(typeof isValidToken);
         if(isValidToken === "false"){
             return res.status(401).json({ success: false, message: 'Token is invalid or expired'});
         }
@@ -21,7 +20,6 @@ async function validateToken(req, next) {
         }
         authClient.isAccessTokenValide({accessToken: token[1]}, (err, data) => {
             if (!err){
-                console.log("data.isTokenValide", data.isTokenValide);
                 resolve(data.isTokenValide);
             }else{
                 reject(err);

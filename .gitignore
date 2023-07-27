@@ -1,0 +1,3 @@
+/weather-report-ui/node_modules/*
+/grpc-project/node_modules/*
+/grpc-project/coverage/*

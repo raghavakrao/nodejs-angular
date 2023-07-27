@@ -1,42 +1,45 @@
-
-const {weatherClient} = require("./client");
-const {auth} = require('./middleware');
+const {authClient} = require("./client");
 const express = require('express');
 const cors = require('cors');
 const compression = require('compression');
 const bodyParser = require('body-parser');
+const validation  = require('./lib/validation');
 const app = express();
-const PORT = 8001;
 app.use(compression());
 app.use(cors()); // Enable CORS for all routes
 app.use(bodyParser.json({limit: '50mb'}));
 app.use(bodyParser.urlencoded({extended: false, limit: '50mb'}));
 
-app.get('/api/weather', auth, async (req, res, next) => {
-    const { city } = req.query;
+app.post('/authenticate', async (req, res, next) => {
     try {
-        if (!city) {
-            return res.status(400).send({error: "city is required field.", success: false});
+        const { error, value: payload } = validation.authenticateRequest(req.body);
+        if (error) {
+            return res.status(400).send({error: error.details[0].message, success:false});
         }
-        weatherClient.GetWeather({city: city}, (err, data) => {
+        authClient.Authenticate(payload, (err, data) => {
             if (!err){
-                if(data){
+                if(data.token){
                     return res.status(200).send({
                         success: true,
-                        temperature: data.temperature,
-                        label: data.label,
+                        access_token: data.token
                     });
                 }else{
-                    return res.status(200).json({success: false, message: "Temperature label not found."});
+                    return res.status(401).json({
+                        success: false,
+                        error: "Incorrect username or password"
+                    });
                 }
             }else{
-                throw err;
+                return res.status(500).json({
+                    success: false,
+                    error: "Something went wrong at server side."
+                });
             }
         });
     } catch (error) {
-      next(error);
+        next(error);
     }
-  });
+});
 
 // Error handlers
 app.use(function (err, req, res, next) {
