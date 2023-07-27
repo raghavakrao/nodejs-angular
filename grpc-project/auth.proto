@@ -1,23 +1,12 @@
 syntax = "proto3";
 
 service AuthService {
-  rpc Authenticate(UserCredentials) returns (AuthToken) {}
   rpc isAccessTokenValide(AccessToken) returns (IsAccessToken) {}
-}
-
-message UserCredentials {
-  string username = 1;
-  string password = 2;
-}
-
-message AuthToken {
-  string token = 1;
 }
 
 message AccessToken {
   string accessToken = 1;
 }
-
 
 message IsAccessToken {
   string isTokenValide = 1;
