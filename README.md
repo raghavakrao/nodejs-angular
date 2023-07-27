@@ -6,6 +6,15 @@ Here's a summary of the steps to run the project:
 
 1. Set Environment Variables:
    Create a `.env` file inside of `grpc-project` directory and add the required environment variables, including the database connection details and the OpenWeatherMap API key.
+   - NODE_ENV = "development"
+   - DB_HOST = ""
+   - DB_USER = ""
+   - DB_PASSWORD = ""
+   - DB_NAME = ""
+   - DB_PORT = ""
+   - API_KEY = ""// Go to "https://home.openweathermap.org/api_keys" this website and create your own apikey, It's free. 
+
+    Note: Without API key it wont work.
 
 2. Backend Service:
    - Navigate to the `grpc-project` directory.
