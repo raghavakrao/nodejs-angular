@@ -33,11 +33,11 @@ Here's a summary of the steps to run the project:
 4. Login:
    - Use the provided usernames and passwords to log in as User 1 or User 2.
    - User - 1 
-   - username - rajan
+   - username - ragh
    - password - testuser
 
    - User - 2
-   - username - raj
+   - username - raghav
    - password - testpassword
 
 5. Rollback (Optional):
